@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-mongo
+  namespace: namespace-cnetdisk
+spec:
+  accessModes: ["ReadWriteMany"]
+  storageClassName: storage-cnetdisk-mongo
+  resources:
+    requests:
+      storage: 2G

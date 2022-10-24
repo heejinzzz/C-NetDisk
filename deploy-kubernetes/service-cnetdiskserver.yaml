@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-cnetdiskserver
+  namespace: namespace-cnetdisk
+spec:
+  type: NodePort
+  selector:
+    podName: pod-cnetdiskserver
+  ports:
+    - targetPort: 6732
+      port: 6732
+      nodePort: 30732

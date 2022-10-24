@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-cnetdiskserver
+  namespace: namespace-cnetdisk
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      podName: pod-cnetdiskserver
+  template:
+    metadata:
+      labels:
+        podName: pod-cnetdiskserver
+    spec:
+      containers:
+        - name: cnetdisk
+          image: heejinzzz/c-netdisk:v0.0.2
+          ports:
+            - containerPort: 6732
+          volumeMounts:
+            - name: cnetdisk-cloudfile-volume
+              mountPath: /C-NetDisk/cloudfile
+      volumes:
+        - name: cnetdisk-cloudfile-volume
+          persistentVolumeClaim:
+            claimName: pvc-cnetdisk-cloudfile

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-cnetdisk-cloudfile
+spec:
+  nfs:
+    server: 192.168.222.100
+    path: /data/C-NetDisk/cloudfile
+  storageClassName: storage-cnetdisk-cloudfile
+  capacity:
+    storage: 100G
+  accessModes: ["ReadWriteMany"]
+  persistentVolumeReclaimPolicy: Retain

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-mongo
+  namespace: namespace-cnetdisk
+spec:
+  type: ClusterIP
+  clusterIP: 10.96.2.10
+  selector:
+    podName: pod-mongo
+  ports:
+    - targetPort: 27017
+      port: 27017

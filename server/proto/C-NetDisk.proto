@@ -1,0 +1,109 @@
+syntax = "proto3";
+
+option go_package = "./proto";
+
+service CNetDisk {
+  rpc UserRegister(UserRegisterRequest) returns (UserRegisterResponse) {}
+  rpc UserLogin(UserLoginRequest) returns (UserLoginResponse) {}
+  rpc GetItemInfo(GetItemInfoRequest) returns (GetItemInfoResponse) {}
+  rpc CreateItem(CreateItemRequest) returns (CreateItemResponse) {}
+  rpc UploadFile(stream UploadFileRequest) returns (stream UploadFileResponse) {}
+  rpc DownloadFile(DownloadFileRequest) returns (stream DownloadFileResponse) {}
+  rpc DeleteItem(DeleteItemRequest) returns (DeleteItemResponse) {}
+  rpc RenameItem(RenameItemRequest) returns (RenameItemResponse) {}
+}
+
+message UserRegisterRequest {
+  string Name = 1;
+  string Password = 2;
+}
+
+message UserRegisterResponse {
+  string Msg = 1;
+}
+
+message UserLoginRequest {
+  string Name = 1;
+  string Password = 2;
+}
+
+message UserLoginResponse {
+  string Msg = 1;
+}
+
+enum ItemType {
+  File = 0;
+  Directory = 1;
+}
+
+message ItemBasicInfo {
+  string Name = 1;
+  ItemType Type = 2;
+  int64 Size = 3;
+}
+
+message ItemInfo {
+  string Name = 1;
+  ItemType Type = 2;
+  int64 Size = 3;
+  string Path = 4;
+  repeated ItemBasicInfo Children = 5;
+}
+
+message GetItemInfoRequest {
+  string Name = 1;
+}
+
+message GetItemInfoResponse {
+  string Msg = 1;
+  ItemInfo Info = 2;
+}
+
+message CreateItemRequest {
+  ItemInfo Info = 1;
+}
+
+message CreateItemResponse {
+  string Msg = 1;
+}
+
+enum Signal {
+  Receiving = 0;
+  FinishReceive = 1;
+}
+
+message UploadFileRequest {
+  string Name = 1;
+  bytes Data = 2;
+}
+
+message UploadFileResponse {
+  Signal ResSignal = 1;
+  int64 GetSize = 2;
+}
+
+message DownloadFileRequest {
+  string Name = 1;
+}
+
+message DownloadFileResponse {
+  string Msg = 1;
+  bytes Data = 2;
+}
+
+message DeleteItemRequest {
+  string Name = 1;
+}
+
+message DeleteItemResponse {
+  string Msg = 1;
+}
+
+message RenameItemRequest {
+  string Name = 1;
+  string NewFileName = 2;
+}
+
+message RenameItemResponse {
+  string Msg = 1;
+}
