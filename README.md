@@ -20,6 +20,6 @@ go build -o cnetdisk  # "go build -o cnetdisk.exe" on Windows
 ```
 即可执行：
 ```shell
-cnetdisk --host <C-NetDisk server host> -- port <C-NetDisk server port>
+cnetdisk --host <C-NetDisk server host> --port <C-NetDisk server port>
 ```
 开始使用 C-NetDisk 云盘。
